@@ -1,51 +1,52 @@
+import React, {useState} from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import {TasksType} from "../../features/tasksList/tasks-reducer.ts";
+import {IconButton} from "@mui/material";
 
-export function Task() {
+export function Task(props: TasksType) {
+    const [expanded, setExpanded] = useState(false);
 
+
+    const handleExpand = () => {
+        setExpanded(!expanded);
+    };
+
+    if (!props.children) return <Typography sx={{'marginLeft': '16px'}}>{props.title}</Typography>;
 
     return (
         <div>
-            <Accordion TransitionProps={{ unmountOnExit: true }} sx={{ boxShadow: 'none' }}>
+            <Accordion TransitionProps={{unmountOnExit: true}} sx={{
+                boxShadow: 'none',
+            }} expanded={expanded}>
                 <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
+                    sx={{
+                        cursor: 'default !important',
+                    }}
+                    expandIcon={<IconButton onClick={handleExpand}><ExpandMoreIcon/></IconButton>}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
-                    <Typography>Accordion 1</Typography>
+                    <Typography>{props.title}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Accordion TransitionProps={{ unmountOnExit: true }} sx={{ boxShadow: 'none' }}>
-                        <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1b-content"
-                            id="panel1b-header"
-                        >
-                            <Typography>Accordion 1.1</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <Accordion TransitionProps={{ unmountOnExit: true }}  sx={{ boxShadow: 'none' }}>
-                                <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon />}
-                                    aria-controls="panel2a-content"
-                                    id="panel2a-header"
-                                >
-                                    <Typography>Accordion 1.1.1</Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <Typography>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                        malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                    </Typography>
-                                </AccordionDetails>
-                            </Accordion>
-                        </AccordionDetails>
-                    </Accordion>
+                    {props.children.map(task => {
+                        return (
+                            <Task
+                                title={task.title}
+                                description={task.description}
+                                isDone={task.isDone}
+                                id={task.title}
+                                children={task.children}
+                            />
+                        );
+                    })}
                 </AccordionDetails>
             </Accordion>
         </div>
     );
 }
+

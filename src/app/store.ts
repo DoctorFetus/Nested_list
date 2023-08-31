@@ -6,3 +6,5 @@ export const store = configureStore({
         tasks: tasksReducer
     }
 })
+
+export type AppRootStateType = ReturnType<typeof store.getState>

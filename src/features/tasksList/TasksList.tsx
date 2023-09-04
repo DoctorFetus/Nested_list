@@ -27,7 +27,7 @@ const TasksList = () => {
                     key={task.id}
                     task={task}
                     findTaskHandler={findTaskHandler}
-                    chaneTaskStatusHandler={changeTaskStatusHandler}
+                    changeTaskStatusHandler={changeTaskStatusHandler}
                 />
             })}
         </div>

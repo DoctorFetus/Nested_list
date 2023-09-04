@@ -1,6 +1,4 @@
 .container {
     display: flex;
-    width: 1000px;
-    height: auto;
-    border: 3px solid black;
+    min-height: 640px;
 }

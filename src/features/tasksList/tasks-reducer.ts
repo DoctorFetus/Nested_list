@@ -21,26 +21,26 @@ const initialState: initialStateType = {
             id: v1(),
             title: 'Task 1',
             isDone: false,
-            description: 'descr 1',
+            description: 'This is a description for Task 1',
             children: [
                 {
                     id: v1(),
                     title: 'Task 1.1',
                     isDone: false,
-                    description: 'descr 1.1',
+                    description: 'This is a description for Task 1.1',
                     children: []
                 },
                 {
                     id: v1(),
                     title: 'Task 1.2',
                     isDone: false,
-                    description: 'descr 1.2',
+                    description: 'This is a description for Task 1.2',
                     children: [
                         {
                             id: v1(),
                             title: 'Task 1.2.1',
                             isDone: false,
-                            description: 'descr 1.2.1',
+                            description: 'This is a description for Task 1.2.1',
                             children: []
                         }
                     ]
@@ -52,7 +52,7 @@ const initialState: initialStateType = {
             title: 'Task 2',
             isDone: false,
             children: [],
-            description: 'descr 2'
+            description: 'This is a description for Task 2'
         }
 
 
@@ -91,9 +91,19 @@ const slice = createSlice({
             const newCurrent = findTaskById(state.tasks, action.payload.id);
             state.currentTask = newCurrent
         },
-        changeTaskStatus: (state, action: PayloadAction<{id: string}>) => {
+        changeTaskStatus: (state, action: PayloadAction<{ id: string }>) => {
             const task = findTaskById(state.tasks, action.payload.id)
-            if (task )task.isDone = !task.isDone
+            if (task) task.isDone = !task.isDone
+        },
+        updateTask: (state, action: PayloadAction<{ title: string, descr: string, id: string }>) => {
+            const {title, descr, id} = action.payload
+            let task = findTaskById(state.tasks, id)
+            if (task) {
+                task.title = title
+                task.description = descr
+                state.currentTask = task
+            }
+
         }
     }
 })

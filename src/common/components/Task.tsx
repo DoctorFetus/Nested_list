@@ -23,6 +23,10 @@ export const Task = memo(({findTaskHandler, changeTaskStatusHandler, task}: Task
 
     const isExpandMoreVisible = !task.children.length ? {display: 'none'} : {}
 
+    if (task.title === 'aaa') {
+        console.log(task)
+    }
+
     return (
         <div>
             <Accordion TransitionProps={{unmountOnExit: true}} sx={{
@@ -37,7 +41,7 @@ export const Task = memo(({findTaskHandler, changeTaskStatusHandler, task}: Task
                     id="panel1a-header"
                 >
                     <span style={{display: 'flex', alignItems: 'center'}}>
-                        <Checkbox onChange={() => changeTaskStatusHandler(task.id)} value={task.isDone}/>
+                        <Checkbox onChange={() => changeTaskStatusHandler(task.id)} checked={task.isDone}/>
                         <Typography onClick={() => findTaskHandler(task.id)}>{task.title}</Typography></span>
                 </AccordionSummary>
                 <AccordionDetails>

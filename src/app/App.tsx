@@ -4,8 +4,7 @@ import Display from "../features/display/Display.tsx";
 function App() {
 
   return (
-    <div>
-      {/*<Task/>*/}
+    <div className={'container'}>
         <Display />
     </div>
   )

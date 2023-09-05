@@ -1,6 +1,7 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createSlice, current, PayloadAction} from "@reduxjs/toolkit";
 import {findTaskById} from "../../common/utils/findTaskById.ts";
-import {v1, v1 as uuidv1} from 'uuid';
+import {v1} from 'uuid';
+import {chooseTasksById} from "../../common/utils/chooseTasksById.ts";
 
 export type TasksType = {
     title: string
@@ -8,6 +9,7 @@ export type TasksType = {
     isDone: boolean
     children: TasksType[]
     id: string
+    isChosen?: boolean
 }
 
 type initialStateType = {
@@ -22,6 +24,7 @@ const initialState: initialStateType = {
             title: 'Task 1',
             isDone: false,
             description: 'This is a description for Task 1',
+            isChosen: false,
             children: [
                 {
                     id: v1(),
@@ -52,7 +55,8 @@ const initialState: initialStateType = {
             title: 'Task 2',
             isDone: false,
             children: [],
-            description: 'This is a description for Task 2'
+            description: 'This is a description for Task 2',
+            isChosen: false
         }
 
 
@@ -88,8 +92,7 @@ const slice = createSlice({
         },
 
         setCurrentTask: (state, action: PayloadAction<{ id: string }>) => {
-            const newCurrent = findTaskById(state.tasks, action.payload.id);
-            state.currentTask = newCurrent
+            state.currentTask = findTaskById(state.tasks, action.payload.id)
         },
         changeTaskStatus: (state, action: PayloadAction<{ id: string }>) => {
             const task = findTaskById(state.tasks, action.payload.id)
@@ -104,6 +107,14 @@ const slice = createSlice({
                 state.currentTask = task
             }
 
+        },
+        chooseTask: (state, action: PayloadAction<{ id: string }>) => {
+            let task = findTaskById(state.tasks, action.payload.id)
+            if (task) {
+                const chosenTask = chooseTasksById(task, action.payload.id)
+                task.isChosen = chosenTask!.isChosen
+                task.children = chosenTask!.children
+            }
         }
     }
 })

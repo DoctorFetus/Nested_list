@@ -19,6 +19,10 @@ const TasksList = () => {
         dispatch(tasksActions.changeTaskStatus({id}))
     }
 
+    const chooseTaskHandler = (id: string) => {
+        dispatch(tasksActions.chooseTask({id}))
+    }
+
 
     return (
         <div className={s.container}>
@@ -28,6 +32,7 @@ const TasksList = () => {
                     task={task}
                     findTaskHandler={findTaskHandler}
                     changeTaskStatusHandler={changeTaskStatusHandler}
+                    chooseTaskHandler={chooseTaskHandler}
                 />
             })}
         </div>

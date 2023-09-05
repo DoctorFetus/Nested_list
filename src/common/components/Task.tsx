@@ -5,15 +5,19 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {TasksType} from "../../features/tasksList/tasks-reducer.ts";
-import {Checkbox, IconButton} from "@mui/material";
+import {Button, Checkbox, IconButton} from "@mui/material";
 
 type TaskPropsType = {
     findTaskHandler: (id: string) => void
     changeTaskStatusHandler: (id: string) => void
+    chooseTaskHandler: (id: string) => void
     task: TasksType
 }
 
-export const Task = memo(({findTaskHandler, changeTaskStatusHandler, task}: TaskPropsType) => {
+export const Task = memo(({findTaskHandler,
+                              changeTaskStatusHandler,
+                              chooseTaskHandler,
+                              task}: TaskPropsType) => {
 
     const [expanded, setExpanded] = useState(false);
 
@@ -22,11 +26,6 @@ export const Task = memo(({findTaskHandler, changeTaskStatusHandler, task}: Task
     };
 
     const isExpandMoreVisible = !task.children.length ? {display: 'none'} : {}
-
-    if (task.title === 'aaa') {
-        console.log(task)
-    }
-
     return (
         <div>
             <Accordion TransitionProps={{unmountOnExit: true}} sx={{
@@ -42,7 +41,9 @@ export const Task = memo(({findTaskHandler, changeTaskStatusHandler, task}: Task
                 >
                     <span style={{display: 'flex', alignItems: 'center'}}>
                         <Checkbox onChange={() => changeTaskStatusHandler(task.id)} checked={task.isDone}/>
-                        <Typography onClick={() => findTaskHandler(task.id)}>{task.title}</Typography></span>
+                        <Typography onClick={() => findTaskHandler(task.id)}>{task.title}</Typography>
+                        <Button onClick={() => chooseTaskHandler(task.id)}>choose</Button>
+                    </span>
                 </AccordionSummary>
                 <AccordionDetails>
                     {task.children.map(childTask => {
@@ -52,6 +53,7 @@ export const Task = memo(({findTaskHandler, changeTaskStatusHandler, task}: Task
                                 task={childTask}
                                 findTaskHandler={findTaskHandler}
                                 changeTaskStatusHandler={changeTaskStatusHandler}
+                                chooseTaskHandler={chooseTaskHandler}
                             />
                         );
                     })}

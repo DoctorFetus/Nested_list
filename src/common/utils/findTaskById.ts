@@ -1,6 +1,6 @@
 import {TasksType} from "../../features/tasksList/tasks-reducer.ts";
 
-export function findTaskById(tasks: TasksType[], id: string): TasksType | null {
+export const findTaskById = (tasks: TasksType[], id: string): TasksType | null => {
     for (let i = 0; i < tasks.length; i++) {
         if (tasks[i].id === id) {
             return tasks[i];
@@ -14,3 +14,7 @@ export function findTaskById(tasks: TasksType[], id: string): TasksType | null {
     }
     return null;
 }
+
+
+
+

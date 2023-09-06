@@ -3,11 +3,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../app/store.ts";
 import {tasksActions, TasksType} from "./tasks-reducer.ts";
 import React from "react";
-import {Task} from "../../common/components/Task.tsx";
+import {Task} from "../../common/components/Task/Task.tsx";
 
 const TasksList = () => {
 
     const tasks = useSelector<AppRootStateType, TasksType[]>(state => state.tasks.tasks)
+    const isChooseMode = useSelector<AppRootStateType>(state => state.app.chooseMode)
 
     const dispatch = useDispatch()
 
@@ -19,14 +20,19 @@ const TasksList = () => {
         dispatch(tasksActions.changeTaskStatus({id}))
     }
 
-    const chooseTaskHandler = (id: string) => {
-        dispatch(tasksActions.chooseTask({id}))
+    const chooseTaskHandler = (id: string, event: any) => {
+
+        const tagChildren = event.target.childNodes
+
+        if (isChooseMode && tagChildren.length && tagChildren[0].tagName === 'SPAN') {
+            dispatch(tasksActions.chooseTask({id}))
+        }
     }
 
 
     return (
         <div className={s.container}>
-            {tasks.map(task => {
+              {tasks.length ? tasks.map(task => {
                 return <Task
                     key={task.id}
                     task={task}
@@ -34,7 +40,8 @@ const TasksList = () => {
                     changeTaskStatusHandler={changeTaskStatusHandler}
                     chooseTaskHandler={chooseTaskHandler}
                 />
-            })}
+            })
+              :  <div className={s.emptyList}>Your task list are empty...</div> }
         </div>
     );
 };

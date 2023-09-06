@@ -30,7 +30,7 @@ const EditModeBar = (props: { currentTask: TasksType }) => {
                     <TextField sx={TextFiledStyle} maxRows={10} multiline label={'Description'} value={descr} onChange={(e) => setDescr(e.currentTarget.value)}/>
                     <Button variant={'contained'} onClick={() => changeTask()}>SAVE</Button>
                 </>
-                : <Button variant={'contained'} className={s.editModeBtn} onClick={() => setEditMode(!editMode)}>EDIT</Button>}
+                : <Button variant={'contained'}  className={s.editModeBtn} onClick={() => setEditMode(!editMode)}>EDIT</Button>}
         </div>
     );
 };

@@ -1,4 +1,12 @@
-.container {
+.tasksContainer {
+    margin-top: 50px;
     display: flex;
-    min-height: 640px;
+    gap: 20px;
+    min-height: 540px;
+}
+
+.tools {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
 }

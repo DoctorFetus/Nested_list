@@ -1,4 +1,3 @@
-import {findTaskById} from "./findTaskById.ts";
 import {TasksType} from "../../features/tasksList/tasks-reducer.ts";
 
 export const chooseTasksById = (task: TasksType, id: string, isChosen: boolean = true) => {

@@ -1,3 +1,20 @@
 * {
     font-size: 19px;
 }
+
+[data-theme='light'] {
+    --color: #000000;
+    --background: #FFFFFF;
+    --btn_color: 'primary'
+}
+
+[data-theme='dark'] {
+    --color: #000000;
+    --background: #5090D3;
+    --btn_color: 'secondary'
+}
+
+html {
+    background-color: var(--background);
+    color: var(--color);
+}

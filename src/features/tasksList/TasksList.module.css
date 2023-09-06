@@ -1,3 +1,12 @@
 .container {
     width: 50%;
 }
+
+.emptyList {
+    font-family: 'Roboto', sans-serif;
+    display: block;
+    text-align: center;
+    font-size: 35px;
+    font-weight: 600;
+    padding-top: 30px;
+}

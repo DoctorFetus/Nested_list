@@ -5,11 +5,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {TasksType} from "../../../features/tasksList/tasks-reducer.ts";
-import {Button, Checkbox, IconButton, Paper} from "@mui/material";
-import s from './Task.module.css'
-import classNames from "classnames";
-import {useSelector} from "react-redux";
-import {AppRootStateType} from "../../../app/store.ts";
+import {Checkbox, IconButton, Paper} from "@mui/material";
 
 type TaskPropsType = {
     findTaskHandler: (id: string) => void

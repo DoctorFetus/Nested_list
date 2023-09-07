@@ -1,7 +1,7 @@
 import s from './display.module.css'
 import TasksList from "../tasksList/TasksList.tsx";
 import TaskText from "../taskText/TaskText.tsx";
-import React, {useEffect} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {tasksActions} from "../tasksList/tasks-reducer.ts";
 import {AddItemForm} from "../../common/components/AddTaskForm/AddItemForm.tsx";
@@ -13,17 +13,22 @@ import {AppRootStateType} from "../../app/store.ts";
 
 const Display = () => {
     const theme = useSelector<AppRootStateType>(state => state.app.theme)
-    const dispatch = useDispatch()
-
     const isChooseMode = useSelector<AppRootStateType>(state => state.app.chooseMode)
-
-    const addTask = (newTitle: string) => {
-        dispatch(tasksActions.addTask({newTitle, id: null}))
-    }
+    const dispatch = useDispatch()
+    const [searchValue, setSearchValue] = useState('')
 
     useEffect(() => {
         document.documentElement.dataset.theme = theme + ''
     }, [theme])
+
+
+    const searchInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setSearchValue(e.currentTarget.value)
+    }
+
+    const addTask = (newTitle: string) => {
+        dispatch(tasksActions.addTask({newTitle, id: null}))
+    }
 
     const setChooseMode = (isChooseMode: boolean) => {
         dispatch(appActions.setChooseMode({isChooseMode}))
@@ -44,11 +49,11 @@ const Display = () => {
                         <Button variant={'contained'} color={'error'} onClick={() => deleteTask()}>delete</Button>
                         <Button onClick={() => setChooseMode(false)} variant={'outlined'}>cancel</Button>
                     </>}
-                <TextField label={'Find task'}></TextField>
+                <TextField value={searchValue} onChange={searchInputHandler} label={'Find task'}></TextField>
                 <IconButton onClick={() => dispatch(appActions.setTheme({}))} ><Brightness4Icon/></IconButton>
             </div>
             <div className={s.tasksContainer}>
-                <TasksList/>
+                <TasksList searchValue={searchValue}/>
                 <TaskText/>
             </div>
         </div>

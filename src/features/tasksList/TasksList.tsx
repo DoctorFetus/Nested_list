@@ -4,8 +4,11 @@ import {AppRootStateType} from "../../app/store.ts";
 import {tasksActions, TasksType} from "./tasks-reducer.ts";
 import React from "react";
 import {Task} from "../../common/components/Task/Task.tsx";
+import {findTaskByName} from "../../common/utils/findTaskByName.ts";
 
-const TasksList = () => {
+type TaskListProps = {searchValue: string }
+
+const TasksList = ({searchValue}: TaskListProps) => {
 
     const tasks = useSelector<AppRootStateType, TasksType[]>(state => state.tasks.tasks)
     const isChooseMode = useSelector<AppRootStateType>(state => state.app.chooseMode)
@@ -29,10 +32,12 @@ const TasksList = () => {
         }
     }
 
+    let tasksForRender = tasks
+    if (searchValue) tasksForRender = findTaskByName(tasks, searchValue)
 
     return (
         <div className={s.container}>
-              {tasks.length ? tasks.map(task => {
+              {tasks.length ? tasksForRender.map(task => {
                 return <Task
                     key={task.id}
                     task={task}

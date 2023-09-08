@@ -11,7 +11,7 @@ export type TasksType = {
     isDone: boolean
     children: TasksType[]
     id: string
-    isChosen: any
+    isChosen: boolean
 }
 
 type initialStateType = {

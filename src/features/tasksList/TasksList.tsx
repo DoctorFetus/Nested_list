@@ -4,7 +4,7 @@ import {AppRootStateType} from "../../app/store.ts";
 import {tasksActions, TasksType} from "./tasks-reducer.ts";
 import React from "react";
 import {Task} from "../../common/components/Task/Task.tsx";
-import {findTaskByName} from "../../common/utils/findTaskByName.ts";
+import {filterTasksByName} from "../../common/utils/filterTasksByName.ts";
 
 type TaskListProps = {searchValue: string }
 
@@ -23,17 +23,17 @@ const TasksList = ({searchValue}: TaskListProps) => {
         dispatch(tasksActions.changeTaskStatus({id}))
     }
 
-    const chooseTaskHandler = (id: string, event: any) => {
+    const chooseTaskHandler = (id: string, event: React.MouseEvent<HTMLDivElement>) => {
+        const target = event.target as HTMLDivElement
+        const tagChildren = target.childNodes
 
-        const tagChildren = event.target.childNodes
-
-        if (isChooseMode && tagChildren.length && tagChildren[0].tagName === 'SPAN') {
+        if (isChooseMode && tagChildren.length && tagChildren[0].nodeName === 'SPAN') {
             dispatch(tasksActions.chooseTask({id}))
         }
     }
 
     let tasksForRender = tasks
-    if (searchValue) tasksForRender = findTaskByName(tasks, searchValue)
+    if (searchValue) tasksForRender = filterTasksByName(tasks, searchValue)
 
     return (
         <div className={s.container}>

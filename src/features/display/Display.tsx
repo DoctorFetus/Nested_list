@@ -14,8 +14,10 @@ import {AppRootStateType} from "../../app/store.ts";
 const Display = () => {
     const theme = useSelector<AppRootStateType>(state => state.app.theme)
     const isChooseMode = useSelector<AppRootStateType>(state => state.app.chooseMode)
+    const chosenTasks = useSelector<AppRootStateType>(state => state.tasks.idOfTheChosenTasks) as string[]
     const dispatch = useDispatch()
     const [searchValue, setSearchValue] = useState('')
+
 
     useEffect(() => {
         document.documentElement.dataset.theme = theme + ''
@@ -46,7 +48,7 @@ const Display = () => {
                 {!isChooseMode
                     ? <Button onClick={() => setChooseMode(true)} variant={'outlined'}>choose</Button>
                     : <>
-                        <Button variant={'contained'} color={'error'} onClick={() => deleteTask()}>delete</Button>
+                        <Button disabled={!chosenTasks.length} variant={'contained'} color={'error'} onClick={() => deleteTask()}>delete</Button>
                         <Button onClick={() => setChooseMode(false)} variant={'outlined'}>cancel</Button>
                     </>}
                 <TextField value={searchValue} onChange={searchInputHandler} label={'Find task'}></TextField>

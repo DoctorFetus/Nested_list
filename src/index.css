@@ -1,20 +1,21 @@
 * {
     font-size: 19px;
+    font-family: Roboto, sans-serif;
 }
 
 [data-theme='light'] {
-    --color: #000000;
+    --color: rgb(30, 136, 229);
     --background: #FFFFFF;
     --btn_color: 'primary'
 }
 
 [data-theme='dark'] {
-    --color: #000000;
+    --color: rgb(156, 39, 176);
     --background: #5090D3;
     --btn_color: 'secondary'
 }
 
 html {
-    background-color: var(--background);
+    /*background-color: var(--background);*/
     color: var(--color);
 }

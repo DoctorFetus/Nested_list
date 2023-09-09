@@ -25,5 +25,5 @@
 
 .taskInfoWrapper {
     display: flex;
-    alignItems: center
+    align-items: center
 }

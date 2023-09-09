@@ -22,3 +22,8 @@
 .taskTitle:hover::after {
     transform: scaleX(1);
 }
+
+.taskInfoWrapper {
+    display: flex;
+    alignItems: center
+}

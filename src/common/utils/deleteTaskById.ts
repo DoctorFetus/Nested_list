@@ -1,4 +1,4 @@
-import {TasksType} from "../../features/tasksList/tasks-reducer.ts";
+import {TasksType} from "../../features/TasksList/model/tasks-reducer.ts";
 
 export const findAndDeleteTask = (tasks: TasksType[], taskId: string) => {
     for (let task of tasks) {

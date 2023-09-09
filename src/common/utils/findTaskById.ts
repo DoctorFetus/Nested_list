@@ -1,4 +1,4 @@
-import {TasksType} from "../../features/tasksList/tasks-reducer.ts";
+import {TasksType} from "../../features/TasksList/model/tasks-reducer.ts";
 
 export const findTaskById = (tasks: TasksType[], id: string): TasksType | null => {
     for (let i = 0; i < tasks.length; i++) {

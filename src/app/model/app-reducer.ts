@@ -1,11 +1,11 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {tasksActions} from "../features/tasksList/tasks-reducer.ts";
+import {tasksActions} from "../../features/TasksList/model/tasks-reducer.ts";
 
 const slice = createSlice({
     name: 'app',
     initialState: {
         chooseMode: false,
-        theme: 'light' as 'light' | 'dark'
+        theme: 'light' as themeType
     },
     reducers: {
         setChooseMode: (state, action: PayloadAction<{isChooseMode: boolean}>) => {
@@ -23,3 +23,5 @@ const slice = createSlice({
 
 export const appReducer = slice.reducer
 export const appActions = slice.actions
+
+export type themeType = 'dark' | 'light'

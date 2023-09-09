@@ -1,5 +1,5 @@
 import {configureStore} from "@reduxjs/toolkit";
-import {tasksReducer} from "../features/tasksList/tasks-reducer";
+import {tasksReducer} from "../../features/TasksList/model/tasks-reducer.ts";
 import {appReducer} from "./app-reducer.ts";
 
 

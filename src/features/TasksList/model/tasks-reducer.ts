@@ -1,8 +1,8 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {findTaskById} from "../../common/utils/findTaskById.ts";
+import {findTaskById} from "../../../common/utils/findTaskById.ts";
 import {v1} from 'uuid';
-import {chooseTasksById} from "../../common/utils/chooseTasksById.ts";
-import {findAndDeleteTask} from "../../common/utils/deleteTaskById.ts";
+import {chooseTasksById} from "../../../common/utils/chooseTasksById.ts";
+import {findAndDeleteTask} from "../../../common/utils/deleteTaskById.ts";
 
 
 export type TasksType = {

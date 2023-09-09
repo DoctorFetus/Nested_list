@@ -1,4 +1,4 @@
-import {TasksType} from "../../features/tasksList/tasks-reducer.ts";
+import {TasksType} from "../../features/TasksList/model/tasks-reducer.ts";
 
 
 const checkingForSubstring = (task: TasksType, substring: string): TasksType[] => {

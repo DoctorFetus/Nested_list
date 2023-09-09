@@ -1,46 +1,47 @@
-import React, {memo, useState} from 'react';
+import React from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {TasksType} from "../../../features/tasksList/tasks-reducer.ts";
+import {TasksType} from "../../../../features/TasksList/model/tasks-reducer.ts";
 import {Checkbox, IconButton, Paper} from "@mui/material";
 import s from './Task.module.css'
+import {useTask} from "../model/useTask.ts";
 
 type TaskPropsType = {
-    findTaskHandler: (id: string) => void
-    changeTaskStatusHandler: (id: string) => void
-    chooseTaskHandler: (id: string, e: React.MouseEvent<HTMLDivElement>) => void
     task: TasksType
 }
 
-export const Task = memo(({
-                              findTaskHandler,
-                              changeTaskStatusHandler,
-                              chooseTaskHandler,
-                              task
-                          }: TaskPropsType) => {
+export const Task = ({ task }: TaskPropsType) => {
 
-    const [expanded, setExpanded] = useState(false);
+    const {
+        findTaskHandler, changeTaskStatusHandler, chooseTaskHandler,
+        expanded, handleExpand, isExpandMoreVisible
+    } = useTask(task)
 
-    const handleExpand = () => {
-        setExpanded(!expanded);
-    };
 
-    const isExpandMoreVisible = !task.children.length ? {display: 'none'} : {}
+    const accordionStyle = {
+        boxShadow: 'none',
+        mt: '0'
+    }
+
+    const accordionSummaryStyle = {
+        cursor: 'default !important',
+        backgroundColor: task.isChosen ? 'rgba(128, 128, 128, 0.3)' : '',
+        mt: '10px'
+    }
+
+    const accordionDetails = {
+        padding: '0 0 10px 20px'
+    }
+
+
     return (
         <div>
-            <Accordion TransitionProps={{unmountOnExit: true}} sx={{
-                boxShadow: 'none',
-                mt: '0'
-            }} expanded={expanded}>
+            <Accordion TransitionProps={{unmountOnExit: true}} sx={accordionStyle} expanded={expanded}>
                 <Paper elevation={2}>
                     <AccordionSummary onClick={(event) => chooseTaskHandler(task.id, event)}
-                                      sx={{
-                                          cursor: 'default !important',
-                                          backgroundColor: task.isChosen ? 'rgba(128, 128, 128, 0.3)': '',
-                                          mt: '10px'
-                                      }}
+                                      sx={accordionSummaryStyle}
                                       expandIcon={
                                           <IconButton
                                               sx={isExpandMoreVisible}
@@ -49,21 +50,18 @@ export const Task = memo(({
                                       aria-controls="panel1a-content"
                                       id="panel1a-header"
                     >
-                    <span style={{display: 'flex', alignItems: 'center'}}>
+                    <span className={s.taskInfoWrapper}>
                         <Checkbox onChange={() => changeTaskStatusHandler(task.id)} checked={task.isDone}/>
                         <span className={s.taskTitle} onClick={() => findTaskHandler(task.id)}>{task.title}</span>
                     </span>
                     </AccordionSummary>
                 </Paper>
-                <AccordionDetails sx={{padding: '0 0 10px 20px'}}>
+                <AccordionDetails sx={accordionDetails}>
                     {task.children.map(childTask => {
                         return (
                             <Task
                                 key={childTask.id}
                                 task={childTask}
-                                findTaskHandler={findTaskHandler}
-                                changeTaskStatusHandler={changeTaskStatusHandler}
-                                chooseTaskHandler={chooseTaskHandler}
                             />
                         );
                     })}
@@ -71,4 +69,4 @@ export const Task = memo(({
             </Accordion>
         </div>
     );
-})
+}

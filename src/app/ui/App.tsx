@@ -7,7 +7,7 @@ import {useAppTheme} from "../model/useAppTheme.ts";
 function App() {
 
     const theme = useAppTheme()
-
+    debugger
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>

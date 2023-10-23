@@ -24,31 +24,31 @@ const initialState: initialStateType = {
     tasks: [
         {
             id: v1(),
-            title: 'Task 1',
+            title: 'Spaghetti Bolognese',
             isDone: false,
-            description: 'This is a description for Task 1',
+            description: ' I plan to make a classic spaghetti bolognese for dinner',
             isChosen: false,
             children: [
                 {
                     id: v1(),
-                    title: 'Task 1.1',
+                    title: 'Ground Beef',
                     isDone: false,
-                    description: 'This is a description for Task 1.1',
+                    description: ' We\'ll need ground beef as the main protein for the sauce',
                     isChosen: false,
                     children: []
                 },
                 {
                     id: v1(),
-                    title: 'Task 1.2',
+                    title: 'Spaghetti',
                     isDone: false,
-                    description: 'This is a description for Task 1.2',
+                    description: 'Spaghetti noodles are a must for this dish',
                     isChosen: false,
                     children: [
                         {
                             id: v1(),
-                            title: 'Task 1.2.1',
+                            title: 'Tomato Sauce',
                             isDone: true,
-                            description: 'This is a description for Task 1.2.1',
+                            description: 'Tomato sauce is the base of the Bolognese sauce',
                             isChosen: false,
                             children: []
                         }
@@ -58,10 +58,10 @@ const initialState: initialStateType = {
         },
         {
             id: v1(),
-            title: 'Task 2',
+            title: 'Something else',
             isDone: true,
             children: [],
-            description: 'This is a description for Task 2',
+            description: 'Take something else to your taste!',
             isChosen: false
         }
 

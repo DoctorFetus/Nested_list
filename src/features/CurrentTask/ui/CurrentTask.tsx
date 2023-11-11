@@ -2,7 +2,7 @@ import s from './CurrentTask.module.css'
 import EditModeBar from "../../../common/components/EditModeBar/ui/EditModeBar.tsx";
 import {AddItemForm} from "../../../common/components/AddTaskForm/ui/AddItemForm.tsx";
 import {Paper} from "@mui/material";
-import * as classNames from "classnames";
+import classNames from 'classnames'
 import {useCurrentTask} from "../model/useCurrentTask.ts";
 
 
